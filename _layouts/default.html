@@ -8,9 +8,21 @@
   <style>
     body {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       margin: 0;
       font-family: Arial, sans-serif;
+    }
+    .top-bar {
+      width: 100%;
+      background-color: #f4f4f4;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .container {
+      display: flex;
+      flex-direction: row;
+      flex-grow: 1;
     }
     header {
       width: 200px;
@@ -42,23 +54,25 @@
   </style>
 </head>
 <body>
-  <header>
-    <center>
-        <h1>Baitcon</h1>
-        <p>30! Years of Ice Cream and Counting</p>
-    </center>
-    <nav>
-      <ul>
-        <li><a href="{{ '/' | relative_url }}">Home</a></li>
-        <li><a href="{{ '/about' | relative_url }}">About</a></li>
-        <li><a href="{{ '/contact' | relative_url }}">Contact</a></li>
-        <li><a href="{{ '/history' | relative_url }}">History</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    {{ content }}
-  </main>
+  <div class="top-bar">
+    <h1>Baitcon</h1>
+    <p>30! Years of Ice Cream and Counting</p>
+  </div>
+  <div class="container">
+    <header>
+      <nav>
+        <ul>
+          <li><a href="{{ '/' | relative_url }}">Home</a></li>
+          <li><a href="{{ '/about' | relative_url }}">About</a></li>
+          <li><a href="{{ '/contact' | relative_url }}">Contact</a></li>
+          <li><a href="{{ '/history' | relative_url }}">History</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      {{ content }}
+    </main>
+  </div>
   <footer>
     <p>&copy; Baitcon</p>
   </footer>
