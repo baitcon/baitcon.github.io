@@ -1,0 +1,74 @@
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .top-bar {
+    width: 100%;
+    background-color: #f4f4f4;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .top-bar img {
+    max-width: 1300px; /* Adjust the size as needed */
+    height: auto;
+  }
+  
+  .left-bar {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    width: 250px;
+    background-color: #f4f4f4;
+    padding: 20px;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    background-color: #f4f4f4;
+    padding: 20px;
+  }
+  
+  header {
+    width: 200px;
+    background-color: #f4f4f4;
+    padding: 20px;
+  }
+  
+  main {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  nav ul {
+    /* list-style-type: none; */
+    padding: 5;
+  }
+  
+  nav ul li {
+    margin: 10px 0;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f4f4f4;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+  }
+
+  /* post-title is a div that jekyll applies */
+  .post-title {
+  }
+
+  .post-content {
+  }

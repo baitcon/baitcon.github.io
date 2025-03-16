@@ -1,0 +1,57 @@
+{%- comment %}
+From https://github.com/cmbuckley/cmbuckley.github.io/blob/main/_includes/listing.html
+https://cmbuckley.co.uk/blog/2021/03/01/generate-nested-url-list-in-jekyll/
+{% endcomment -%}
+
+{{ include.indent }}<ul>
+
+{%- for page in include.pages %}
+
+
+  {%- if page.url contains include.prefix %}
+  {% if page.skipNav == "true" %}
+  {% continue %}
+{% endif %}
+
+{% if page.title == null || page.title == "" %}
+{% continue %}
+{% endif %}
+
+
+    {%- comment %}
+    Check that the prefix is actually at the beginning of the URL {% endcomment %}
+    {%- assign split_by_prefix = page.url | split: include.prefix %}
+    {%- if page.url == include.prefix or split_by_prefix[0] == empty %}
+
+      {%- comment %}
+      Now put the remainder of the URL back together {% endcomment %}
+      {%- assign remainder = split_by_prefix | slice: 1, split_by_prefix.size - 1 | join: include.prefix %}
+      {%- if include.prefix != '/' %}
+        {%- assign remainder = remainder | split: "" | reverse | slice: 1, remainder.size - 1 | reverse | join: "" %}
+      {%- endif %}
+
+      {%- comment %}
+      Only output direct children of the prefix {% endcomment %}
+      {%- unless remainder contains '/' %}
+{{ include.indent }}  <li>
+{{ include.indent }}    <a href="{{ page.url }}">{{ page.link_title | default: page.title | markdownify | remove: '<p>' | remove: '</p>' | strip }}</a>
+
+        {%- if page.url != '/' %}
+          {%- comment %}
+          Are there any pages below this one? {% endcomment %}
+          {%- assign subpages = include.pages | where_exp:'p':'p.url != page.url' | where_exp:'p','p.url contains page.url' %}
+          {%- if subpages.size > 0 %}
+            {%- capture indent %}{{ include.indent }}    {% endcapture %}
+{% include listing.html pages=subpages prefix=page.url indent=indent %}
+
+          {%- endif %}
+        {%- endif %}
+{{ include.indent }}  </li>
+
+      {%- endunless %}
+    {%- endif %}
+  {%- endif %}
+{%- endfor %}
+{{ include.indent }}</ul>
+
+{%- comment %}Avoid trailing whitespace{% endcomment -%}
