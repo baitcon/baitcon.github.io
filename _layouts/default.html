@@ -20,7 +20,7 @@
             {% for page in pages_list %}
               {% if page.title %}
                 <li>
-                  <a href="{{ page.url | relative_url }}">{{ page.title }} / {{page.url}}</a>
+                  <a href="{{ page.url | relative_url }}">{{ page.title }}</a>
                   {% if page.children %}
                     <ul>
                       {% for child in page.children %}
@@ -38,13 +38,40 @@
       {{ content }}
 
       <div>
+<h2> seph recursion</h2>
+
+{% assign pages_list = site.pages | sort: 'url' %}
+
+{% include listing.html pages=pages_list prefix='/' %}
+
         <h2>seph test</h2>
         <ul>
-            {% assign pages_list = site.pages | sort: 'title' %}
+            {% assign pages_list = site.pages | sort: 'url' %}
             {% for page in pages_list %}
+
+
+            {% for item in site.pages %}
+            {% assign item_crumbs = item.url | remove_first: page.dir | split: '/' %}
+    
+            {% if item_crumbs.size == 1 and item.name == 'index.md' %}
+            <li>
+                <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+
+
+
               {% if page.title %}
+
+
+
                 <li>
-                  <a href="{{ page.url | relative_url }}">{{ page.title }} / {{page.url}}</a>
+
+                  {% assign dirs = page.url | split: '/' %}
+                  {{dirs.size}}
+                  
+                  <a href="{{ page.url | relative_url }}">{{ page.title }} -- {{page.url}} -- {{page.dir}}</a>
                   {% if page.children %}
                     <ul>
                       {% for child in page.children %}
@@ -57,14 +84,6 @@
             {% endfor %}
           </ul>
 
-          <ul>
-            {%- for path in page_list -%}
-              {%- assign my_page = site.pages | where: "path", path | first -%}
-              {%- if my_page.title -%}
-                  <li><a class="page-link" href="{{ my_page.url | relative_url }}">{{- my_page.title | escape -}}</a></li>
-              {%- endif -%}
-            {%- endfor -%}
-        </ul>
     </div>
 
     </main>

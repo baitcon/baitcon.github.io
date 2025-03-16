@@ -1,7 +1,6 @@
 ---
 layout: page
 title: A Wildly Incomplete History
-permalink: /history/
 ---
 Baitcon started many years ago, when I (aka Jailbait or JB) got tired of saying to my friends, “You should come up to my place sometime so we can hand crank some really good homemade ice cream.”
 

@@ -1,0 +1,62 @@
+{% comment %}
+    Recursion, MF. Not much for docs about how to do this.
+    A tiny snippet in https://talk.jekyllrb.com/t/how-to-list-subpages/5051/3
+
+    Expected variables:
+    pages_list -- the array of pages
+    parent_path -- current page path
+    level -- nesting level
+{%- endcomment %}
+
+{% assign nextlevel = include.level | plus: 1%}
+
+<li></li>
+<li>Level: {{include.level}} Parent: {{include.parent_path}}</li>
+<li>Next Level: {{nextlevel}}</li>
+<li>Processing: {{include.pages_list | map: 'url'| join ", " }}</l1>
+<li></li>
+
+
+
+{% for page in include.pages_list %}
+
+{% if page.title %}
+
+
+{% if page.skipNav == "true" %}
+    {% continue %}
+{% endif %}
+
+
+{% comment %{}}
+    {% assign dirs = page.url | split: '/' %}
+    {% if dirs.size != include.level %}
+        <li>level skip {{dirs.size}} != {{include.level}} -- {{page.url}}</li>
+        {% continue %}
+    {% endif %} 
+{% endcomment %}
+
+
+    {%comment%} Faking a start_with {%endcomment%}
+    {% assign path_removed = page.path | remove_first: include.parent_path  %}
+    {% assign my_path = page.path | remove_first: '/' %}
+    <li>compare: {{path_removed}} == {{my_path}}</li>
+
+    {% if path_removed != my_path %}
+        {% continue %}
+    {% endif %}
+
+    
+
+    <li>
+       <a href="{{ page.url | relative_url }}"> {{include.level}}  {{ page.title }}</a>        
+    </li>
+
+    {% assign pl = include.pages_list %}
+    {% assign remaining_array = pl | slice: forloop.index, pl.size %}
+    <ul>
+    {% include menu_fragment.html pages_list=remaining_array parent_path=page.path level=nextlevel skiptill=forloop.index%}
+    </ul>
+
+{% endif %}
+{% endfor %}
