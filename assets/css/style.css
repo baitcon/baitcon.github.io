@@ -9,7 +9,6 @@ body {
     width: 100%;
     background-color: #f4f4f4;
     padding: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     text-align: center;
   }
   
@@ -22,10 +21,9 @@ body {
     display: flex;
     flex-direction: row;
     flex-grow: 1;
-    width: 200px;
+    width: 250px;
     background-color: #f4f4f4;
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
   }
 
   .container {
@@ -34,15 +32,12 @@ body {
     flex-grow: 1;
     background-color: #f4f4f4;
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-
   }
   
   header {
     width: 200px;
     background-color: #f4f4f4;
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
   }
   
   main {
@@ -69,4 +64,11 @@ body {
     padding: 10px;
     background-color: #f4f4f4;
     box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+  }
+
+  /* post-title is a div that jekyll applies */
+  .post-title {
+  }
+
+  .post-content {
   }
