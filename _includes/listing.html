@@ -1,14 +1,22 @@
 {%- comment %}
 From https://github.com/cmbuckley/cmbuckley.github.io/blob/main/_includes/listing.html
 https://cmbuckley.co.uk/blog/2021/03/01/generate-nested-url-list-in-jekyll/
-
-Modified to use early returns
 {% endcomment -%}
 
 {{ include.indent }}<ul>
 
 {%- for page in include.pages %}
+
+
   {%- if page.url contains include.prefix %}
+  {% if page.skipNav == "true" %}
+  {% continue %}
+{% endif %}
+
+{% if page.title == null || page.title == "" %}
+{% continue %}
+{% endif %}
+
 
     {%- comment %}
     Check that the prefix is actually at the beginning of the URL {% endcomment %}

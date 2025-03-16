@@ -18,10 +18,24 @@ body {
     height: auto;
   }
   
+  .left-bar {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    width: 200px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  }
+
   .container {
     display: flex;
     flex-direction: row;
     flex-grow: 1;
+    background-color: #f4f4f4;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+
   }
   
   header {
@@ -37,8 +51,8 @@ body {
   }
   
   nav ul {
-    list-style-type: none;
-    padding: 0;
+    /* list-style-type: none; */
+    padding: 5;
   }
   
   nav ul li {

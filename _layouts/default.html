@@ -13,79 +13,14 @@
     <img src="{{ '/assets/images/top-flowers.jpg' | relative_url }}" alt="A horizonal picture ofleaves and flowers">
   </div>
   <div class="container">
-    <header>
-      <nav>
-        <ul>
-            {% assign pages_list = site.pages | sort: 'title' %}
-            {% for page in pages_list %}
-              {% if page.title %}
-                <li>
-                  <a href="{{ page.url | relative_url }}">{{ page.title }}</a>
-                  {% if page.children %}
-                    <ul>
-                      {% for child in page.children %}
-                        <li><a href="{{ child.url | relative_url }}">{{ child.title }}</a></li>
-                      {% endfor %}
-                    </ul>
-                  {% endif %}
-                </li>
-              {% endif %}
-            {% endfor %}
-          </ul>
-        </nav>
-    </header>
+    <div class="left-bar">
+      <nav>        
+        {% assign pages_list = site.pages | sort: 'url' %}
+        {% include listing.html pages=pages_list prefix='/' %}
+      </nav>
+    </div>
     <main>
       {{ content }}
-
-      <div>
-<h2> seph recursion</h2>
-
-{% assign pages_list = site.pages | sort: 'url' %}
-
-{% include listing.html pages=pages_list prefix='/' %}
-
-        <h2>seph test</h2>
-        <ul>
-            {% assign pages_list = site.pages | sort: 'url' %}
-            {% for page in pages_list %}
-
-
-            {% for item in site.pages %}
-            {% assign item_crumbs = item.url | remove_first: page.dir | split: '/' %}
-    
-            {% if item_crumbs.size == 1 and item.name == 'index.md' %}
-            <li>
-                <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
-            </li>
-            {% endif %}
-        {% endfor %}
-
-
-
-              {% if page.title %}
-
-
-
-                <li>
-
-                  {% assign dirs = page.url | split: '/' %}
-                  {{dirs.size}}
-                  
-                  <a href="{{ page.url | relative_url }}">{{ page.title }} -- {{page.url}} -- {{page.dir}}</a>
-                  {% if page.children %}
-                    <ul>
-                      {% for child in page.children %}
-                        <li>C<a href="{{ child.url | relative_url }}">{{ child.title }}</a></li>
-                      {% endfor %}
-                    </ul>
-                  {% endif %}
-                </li>
-              {% endif %}
-            {% endfor %}
-          </ul>
-
-    </div>
-
     </main>
   </div>
   <footer>
